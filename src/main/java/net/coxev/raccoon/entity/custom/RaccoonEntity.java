@@ -271,19 +271,15 @@ public class RaccoonEntity extends TameableEntity {
                     return ActionResult.SUCCESS;
                 }
             }
-        }
-
-        if (getEquippedStack(EquipmentSlot.MAINHAND).isEmpty() && isRaccoonFood(itemStack)) {
+        } else if (hand == Hand.MAIN_HAND && this.getEquippedStack(EquipmentSlot.MAINHAND).isEmpty() && isRaccoonFood(itemStack)) {
             if(this.getWorld().isClient()){
                 return ActionResult.CONSUME;
             } else {
                 this.eat(player, hand, itemStack);
-                itemStack.setCount(1);
-                this.equipStack(EquipmentSlot.MAINHAND, itemStack);
+                this.equipStack(EquipmentSlot.MAINHAND, itemStack.split(1));
+                return ActionResult.SUCCESS;
             }
-        }
-
-        if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND){
+        } else if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND){
             this.setSitting(!isSitting());
             return ActionResult.SUCCESS;
         }

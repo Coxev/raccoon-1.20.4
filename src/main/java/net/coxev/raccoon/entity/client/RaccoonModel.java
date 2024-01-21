@@ -13,12 +13,10 @@ import net.minecraft.util.math.MathHelper;
 public class RaccoonModel<T extends RaccoonEntity> extends SinglePartEntityModel<T> {
 	public final ModelPart raccoon;
 	public final ModelPart head;
-	public final ModelPart snoot;
 
 	public RaccoonModel(ModelPart root) {
 		this.raccoon = root.getChild("raccoon");
 		this.head = raccoon.getChild("body").getChild("torso").getChild("head");
-		this.snoot = raccoon.getChild("body").getChild("torso").getChild("head").getChild("snoot");
 	}
 	public static TexturedModelData getTexturedModelData() {
 		ModelData modelData = new ModelData();
