@@ -28,7 +28,7 @@ public class RaccoonHeldItemFeatureRenderer extends FeatureRenderer<RaccoonEntit
         if(!entity.getEquippedStack(EquipmentSlot.MAINHAND).isEmpty()){
             ItemStack heldItem = entity.getEquippedStack(EquipmentSlot.MAINHAND);
             matrixStack.push();
-            matrixStack.translate(-0.05f, 1.03f, 0.35f);
+            matrixStack.translate(-0.05f, 1.03f, 0.34f);
             matrixStack.translate(this.getContextModel().head.pivotX / 16.0f, this.getContextModel().head.pivotY / 16.0f, this.getContextModel().head.pivotZ / 16.0f);
             matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(MathHelper.clamp(headYaw, -20.0f, 20.0f) * 1.1f));
             matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(MathHelper.clamp(headPitch, -10.0f, 10.0f) * 1.1f));
