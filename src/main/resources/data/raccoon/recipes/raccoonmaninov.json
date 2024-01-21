@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "#G#",
+        "LLL"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:red_wool"
+        },
+        "G": {
+            "item": "minecraft:gray_wool"
+        },
+        "L": {
+            "item": "minecraft:light_gray_wool"
+        }
+    },
+    "result": {
+        "item": "raccoon:raccoonmaninov",
+        "count": 1
+    }
+}

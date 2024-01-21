@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "raccoon:mr_oizo"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "raccoon:blocks/mr_oizo"
+}

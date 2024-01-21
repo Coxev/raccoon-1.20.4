@@ -1,0 +1,22 @@
+{
+  "item.raccoon.raccoon_spawn_egg": "Oeuf d'apparition de raton-laveur",
+  "item.raccoon.malachite": "Malachite",
+  "item.raccoon.malachite_sword": "Épée en malachite",
+  "item.raccoon.malachite_shovel": "Pelle en malachite",
+  "item.raccoon.malachite_pickaxe": "Pioche en malachite",
+  "item.raccoon.malachite_axe": "Hache en malachite",
+  "item.raccoon.malachite_hoe": "Houe en malachite",
+  "item.raccoon.malachite_helmet": "Casque en malachite",
+  "item.raccoon.malachite_chestplate": "Plastron en malachite",
+  "item.raccoon.malachite_leggings": "Jambières en malachite",
+  "item.raccoon.malachite_boots": "Bottes en malachite",
+
+  "block.raccoon.trash_bin": "Poubelle",
+  "block.raccoon.raccoonmaninov": "Raccoonmaninov",
+  "block.raccoon.mr_oizo": "Mr. Oizo",
+
+  "block.raccoon.malachite_ore": "Minerai de malachite",
+  "block.raccoon.deepslate_malachite_ore": "Minerai de malachite des abîmes",
+
+  "itemgroup.raccoon": "Raton-laveur"
+}

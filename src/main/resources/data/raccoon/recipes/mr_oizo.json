@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        "#O#",
+        "#O#"
+    ],
+    "key": {
+        "#": {
+            "item": "minecraft:yellow_wool"
+        },
+        "O": {
+            "item": "minecraft:orange_wool"
+        }
+    },
+    "result": {
+        "item": "raccoon:mr_oizo",
+        "count": 1
+    }
+}
