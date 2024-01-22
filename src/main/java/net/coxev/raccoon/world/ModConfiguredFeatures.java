@@ -11,16 +11,16 @@ import net.minecraft.structure.rule.BlockMatchRuleTest;
 import net.minecraft.structure.rule.RuleTest;
 import net.minecraft.structure.rule.TagMatchRuleTest;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.FeatureConfig;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
 import java.util.List;
 
 public class ModConfiguredFeatures {
 
-    public static final RegistryKey<ConfiguredFeature<?, ?>> MALACHITE_ORE_KEY = registerKey("malachite_ore");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MALACHITE_ORE_SMALL_KEY = registerKey("malachite_ore_small");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MALACHITE_ORE_MEDIUM_KEY = registerKey("malachite_ore_medium");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MALACHITE_ORE_LARGE_KEY = registerKey("malachite_ore_large");
+    public static final RegistryKey<ConfiguredFeature<?, ?>> MALACHITE_ORE_BURIED_KEY = registerKey("malachite_ore_buried");
 
     public static void boostrap(Registerable<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplacables = new TagMatchRuleTest(BlockTags.STONE_ORE_REPLACEABLES);
@@ -30,7 +30,10 @@ public class ModConfiguredFeatures {
                 List.of(OreFeatureConfig.createTarget(stoneReplacables, ModBlocks.MALACHITE_ORE.getDefaultState()),
                         OreFeatureConfig.createTarget(deepslateReplacables, ModBlocks.DEEPSLATE_MALACHITE_ORE.getDefaultState()));
 
-        register(context, MALACHITE_ORE_KEY, Feature.ORE, new OreFeatureConfig(overworldMalachiteOres, 12));
+        register(context, MALACHITE_ORE_SMALL_KEY, Feature.ORE, new OreFeatureConfig(overworldMalachiteOres, 4, 0.5f));
+        register(context, MALACHITE_ORE_MEDIUM_KEY, Feature.ORE, new OreFeatureConfig(overworldMalachiteOres, 8, 0.5f));
+        register(context, MALACHITE_ORE_LARGE_KEY, Feature.ORE, new OreFeatureConfig(overworldMalachiteOres, 12, 0.7f));
+        register(context, MALACHITE_ORE_BURIED_KEY, Feature.ORE, new OreFeatureConfig(overworldMalachiteOres, 8, 1.0f));
     }
 
     public static RegistryKey<ConfiguredFeature<?, ?>> registerKey(String name) {

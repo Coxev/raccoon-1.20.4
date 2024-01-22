@@ -96,6 +96,7 @@ public class RaccoonEntity extends TameableEntity {
             this.begged = true;
             if(this.beggingAnimationTimeout <= 0){
                 this.beggingAnimationTimeout = 11;
+                this.begToStandAnimationState.stop();
                 this.standToBegAnimationState.start(this.age);
             } else if(this.beggingAnimationTimeout == 1){
                 this.standToBegAnimationState.stop();
@@ -108,13 +109,14 @@ public class RaccoonEntity extends TameableEntity {
                 this.beggingAnimationState.stop();
                 this.begToStandAnimationState.startIfNotRunning(this.age);
                 this.beggingAnimationTimeout = 0;
-                this.begged = !this.begged;
+                this.begged = false;
         }
 
         if (this.isSitting()) {
             this.sat = true;
             if(this.sittingAnimationTimeout <= 0){
                 this.sittingAnimationTimeout = 11;
+                this.sitToStandAnimationState.stop();
                 this.standToSitAnimationState.start(this.age);
             } else if(this.sittingAnimationTimeout == 1){
                 this.standToSitAnimationState.stop();
@@ -127,7 +129,7 @@ public class RaccoonEntity extends TameableEntity {
             this.sittingAnimationState.stop();
             this.sitToStandAnimationState.startIfNotRunning(this.age);
             this.sittingAnimationTimeout = 0;
-            this.sat = !this.sat;
+            this.sat = false;
         }
     }
 
@@ -178,7 +180,7 @@ public class RaccoonEntity extends TameableEntity {
         this.goalSelector.add(0, new SwimGoal(this));
 
         this.goalSelector.add(1, new SitGoal(this));
-        this.goalSelector.add(2, new FollowOwnerGoal(this, 1.5, 10.0f, 2.0f, false));
+        this.goalSelector.add(2, new FollowOwnerGoal(this, 1.3, 10.0f, 2.0f, false));
 
         this.goalSelector.add(3, new RaccoonStealGoal(this, 1.5));
         this.goalSelector.add(4, new RaccoonBegGoal(this, 1.2D));
@@ -306,7 +308,7 @@ public class RaccoonEntity extends TameableEntity {
                 this.setStackInHand(Hand.MAIN_HAND, item.getDefaultStack());
                 return ActionResult.SUCCESS;
             }
-        } else if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND){
+        } else if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND && this.isOwner(player)){
             this.setSitting(!isSitting());
             return ActionResult.SUCCESS;
         }

@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "###",
+        "# #"
+    ],
+    "key": {
+        "#": {
+            "item": "raccoon:malachite"
+        }
+    },
+    "result": {
+        "item": "raccoon:malachite_helmet",
+        "count": 1
+    }
+}

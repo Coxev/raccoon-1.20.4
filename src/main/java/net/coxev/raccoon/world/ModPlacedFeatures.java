@@ -8,7 +8,9 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.gen.YOffset;
 import net.minecraft.world.gen.feature.ConfiguredFeature;
+import net.minecraft.world.gen.feature.OrePlacedFeatures;
 import net.minecraft.world.gen.feature.PlacedFeature;
+import net.minecraft.world.gen.feature.PlacedFeatures;
 import net.minecraft.world.gen.placementmodifier.HeightRangePlacementModifier;
 import net.minecraft.world.gen.placementmodifier.PlacementModifier;
 
@@ -16,13 +18,21 @@ import java.util.List;
 
 public class ModPlacedFeatures {
     public static final RegistryKey<PlacedFeature> MALACHITE_ORE_PLACED_KEY = registerKey("malachite_ore_placed");
+    public static final RegistryKey<PlacedFeature> MALACHITE_ORE_MEDIUM_PLACED_KEY = registerKey("malachite_ore_medium_placed");
+    public static final RegistryKey<PlacedFeature> MALACHITE_ORE_LARGE_PLACED_KEY = registerKey("malachite_ore_large_placed");
+    public static final RegistryKey<PlacedFeature> MALACHITE_ORE_BURIED_PLACED_KEY = registerKey("malachite_ore_buried_placed");
 
     public static void boostrap(Registerable<PlacedFeature> context) {
         var configuredFeatureRegistryEntryLookup = context.getRegistryLookup(RegistryKeys.CONFIGURED_FEATURE);
 
-        register(context, MALACHITE_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MALACHITE_ORE_KEY),
-                ModOrePlacement.modifiersWithCount(12, // Veins per Chunk
-                        HeightRangePlacementModifier.uniform(YOffset.fixed(-80), YOffset.fixed(80))));
+        register(context, MALACHITE_ORE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MALACHITE_ORE_SMALL_KEY),
+                ModOrePlacement.modifiersWithCount(7, HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(-80), YOffset.aboveBottom(80))));
+        register(context, MALACHITE_ORE_MEDIUM_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MALACHITE_ORE_MEDIUM_KEY),
+                ModOrePlacement.modifiersWithCount(2, HeightRangePlacementModifier.uniform(YOffset.fixed(-64), YOffset.fixed(-4))));
+        register(context, MALACHITE_ORE_LARGE_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MALACHITE_ORE_LARGE_KEY),
+                ModOrePlacement.modifiersWithRarity(9, HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(-80), YOffset.aboveBottom(80))));
+        register(context, MALACHITE_ORE_BURIED_PLACED_KEY, configuredFeatureRegistryEntryLookup.getOrThrow(ModConfiguredFeatures.MALACHITE_ORE_BURIED_KEY),
+                ModOrePlacement.modifiersWithCount(4, HeightRangePlacementModifier.trapezoid(YOffset.aboveBottom(-80), YOffset.aboveBottom(80))));
     }
 
     public static RegistryKey<PlacedFeature> registerKey(String name) {

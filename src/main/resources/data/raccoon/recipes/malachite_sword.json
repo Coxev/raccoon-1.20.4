@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        " # ",
+        " # ",
+        " / "
+    ],
+    "key": {
+        "#": {
+            "item": "raccoon:malachite"
+        },
+        "/": {
+            "item": "minecraft:stick"
+        }
+    },
+    "result": {
+        "item": "raccoon:malachite_sword",
+        "count": 1
+    }
+}
