@@ -1,3 +1,9 @@
-// 1.20.4	2024-01-20T04:09:12.4656313	Raccoon/World Gen
-451f57fe00e3f90a2ac00d22bcd282fc591ed2d7 data\raccoon\worldgen\placed_feature\malachite_ore_placed.json
-8147809b8bb288448340e5cdb3bd8374aeca02b1 data\raccoon\worldgen\configured_feature\malachite_ore.json
+// 1.20.4	2024-01-22T01:49:15.9313233	Raccoon/World Gen
+15b7ce332b46b09bf4d77ae2c0a95dc48716aec2 data\raccoon\worldgen\configured_feature\malachite_ore_large.json
+e1379bc866081f8eeeb79f52fe078efad597b14a data\raccoon\worldgen\placed_feature\malachite_ore_large_placed.json
+a82ac2b02519a27309cfa0a2273742ba6cf3ffd5 data\raccoon\worldgen\configured_feature\malachite_ore_small.json
+6500d852c55697fbadd84836bc2af821cc7a1229 data\raccoon\worldgen\placed_feature\malachite_ore_placed.json
+525a74ddad50343f7971ad1f8cd39a9a9e601d65 data\raccoon\worldgen\placed_feature\malachite_ore_medium_placed.json
+f8a47f745c9128912cfbf66c7f0ed586bfd65dcd data\raccoon\worldgen\placed_feature\malachite_ore_buried_placed.json
+a8b30e9e8943a9f684e55c322c5b622ddd36db8d data\raccoon\worldgen\configured_feature\malachite_ore_medium.json
+fbdeca3dba977240be09d76f69f9b5671b1d34ad data\raccoon\worldgen\configured_feature\malachite_ore_buried.json

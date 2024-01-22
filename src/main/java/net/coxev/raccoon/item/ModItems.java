@@ -22,6 +22,7 @@ public class ModItems {
     public static final Item MALACHITE_CHESTPLATE = registerItem("malachite_chestplate", new ArmorItem(ModArmorMaterials.MALACHITE, ArmorItem.Type.CHESTPLATE, new FabricItemSettings()));
     public static final Item MALACHITE_LEGGINGS = registerItem("malachite_leggings", new ArmorItem(ModArmorMaterials.MALACHITE, ArmorItem.Type.LEGGINGS, new FabricItemSettings()));
     public static final Item MALACHITE_BOOTS = registerItem("malachite_boots", new ArmorItem(ModArmorMaterials.MALACHITE, ArmorItem.Type.BOOTS, new FabricItemSettings()));
+    public static final Item MALACHITE_HORSE_ARMOR = registerItem("malachite_horse_armor", new HorseArmorItem(11, "malachite", new Item.Settings().maxCount(1)));
 
     private static void addItemsToIngredientItemGroup(FabricItemGroupEntries entries){
     }

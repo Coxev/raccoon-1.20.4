@@ -23,6 +23,7 @@ public class ModItemGroups {
                         entries.add(ModItems.MALACHITE_PICKAXE);
                         entries.add(ModItems.MALACHITE_AXE);
                         entries.add(ModItems.MALACHITE_HOE);
+                        entries.add(ModItems.MALACHITE_HORSE_ARMOR);
 
                         entries.add(ModItems.MALACHITE_HELMET);
                         entries.add(ModItems.MALACHITE_CHESTPLATE);
