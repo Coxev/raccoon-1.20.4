@@ -37,9 +37,9 @@ public class RaccoonModel<T extends RaccoonEntity> extends SinglePartEntityModel
 
 		ModelPartData face = head.addChild("face", ModelPartBuilder.create().uv(30, 30).cuboid(-4.5F, -12.0F, -12.5F, 9.0F, 7.0F, 5.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 8.0F, 7.5F));
 
-		ModelPartData ear_right = head.addChild("ear_right", ModelPartBuilder.create().uv(9, 24).mirrored().cuboid(-4.5F, -11.0F, -10.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(0.0F, 5.0F, 7.5F));
+		ModelPartData ear_right = head.addChild("ear_right", ModelPartBuilder.create().uv(9, 24).mirrored().cuboid(-1.0F, -2.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)).mirrored(false), ModelTransform.pivot(-3.5F, -4.0F, -2.0F));
 
-		ModelPartData ear_left = head.addChild("ear_left", ModelPartBuilder.create().uv(9, 24).cuboid(2.5F, -11.0F, -10.0F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 5.0F, 7.5F));
+		ModelPartData ear_left = head.addChild("ear_left", ModelPartBuilder.create().uv(9, 24).cuboid(-1.0F, -2.0F, -0.5F, 2.0F, 2.0F, 1.0F, new Dilation(0.0F)), ModelTransform.pivot(3.5F, -4.0F, -2.0F));
 
 		ModelPartData snoot = head.addChild("snoot", ModelPartBuilder.create().uv(0, 0).cuboid(-2.0F, -5.0F, -15.0F, 4.0F, 3.0F, 3.0F, new Dilation(0.0F)), ModelTransform.pivot(0.0F, 5.0F, 7.5F));
 
@@ -67,8 +67,11 @@ public class RaccoonModel<T extends RaccoonEntity> extends SinglePartEntityModel
 		this.updateAnimation(entity.idleAnimationState, ModAnimations.RACCOON_IDLING, ageInTicks, 1f);
 		this.updateAnimation(entity.beggingAnimationState, ModAnimations.RACCOON_BEGGING, ageInTicks, 1f);
 		this.updateAnimation(entity.sittingAnimationState, ModAnimations.RACCOON_SITTING, ageInTicks, 1f);
-		this.updateAnimation(entity.toBegAnimationState, ModAnimations.RACCOON_TO_BEG, ageInTicks, 1f);
-		this.updateAnimation(entity.toSitAnimationState, ModAnimations.RACCOON_TO_SIT, ageInTicks, 1f);
+		this.updateAnimation(entity.standToBegAnimationState, ModAnimations.RACCOON_STAND_TO_BEG, ageInTicks, 1f);
+		this.updateAnimation(entity.standToSitAnimationState, ModAnimations.RACCOON_STAND_TO_SIT, ageInTicks, 1f);
+		this.updateAnimation(entity.begToStandAnimationState, ModAnimations.RACCOON_BEG_TO_STAND, ageInTicks, 1f);
+		this.updateAnimation(entity.sitToStandAnimationState, ModAnimations.RACCOON_SIT_TO_STAND, ageInTicks, 1f);
+		this.updateAnimation(entity.earsWiggleAnimationState, ModAnimations.RACCOON_EARS_WIGGLE, ageInTicks, 1f);
 	}
 
 	private void setHeadAngles(float headYaw, float headPitch){

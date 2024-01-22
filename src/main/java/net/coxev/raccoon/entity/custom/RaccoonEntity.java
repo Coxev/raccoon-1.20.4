@@ -48,19 +48,29 @@ public class RaccoonEntity extends TameableEntity {
     private static final TrackedData<Boolean> STEALING = DataTracker.registerData(RaccoonEntity.class, TrackedDataHandlerRegistry.BOOLEAN);
 
     public int eatingTime;
+    public int stealCooldown = 0;
 
     public final AnimationState idleAnimationState = new AnimationState();
     private int idleAnimationTimeout = 0;
 
     public final AnimationState beggingAnimationState = new AnimationState();
     private int beggingAnimationTimeout = 0;
+    private boolean begged = false;
 
     public final AnimationState sittingAnimationState = new AnimationState();
     private int sittingAnimationTimeout = 0;
+    private boolean sat = false;
 
-    public final AnimationState toBegAnimationState = new AnimationState();
+    public final AnimationState standToBegAnimationState = new AnimationState();
 
-    public final AnimationState toSitAnimationState = new AnimationState();
+    public final AnimationState standToSitAnimationState = new AnimationState();
+
+    public final AnimationState begToStandAnimationState = new AnimationState();
+
+    public final AnimationState sitToStandAnimationState = new AnimationState();
+
+    public final AnimationState earsWiggleAnimationState = new AnimationState();
+    private int earsWiggleAnimationTimeout = 0;
 
     public RaccoonEntity(EntityType<? extends TameableEntity> entityType, World world) {
         super(entityType, world);
@@ -75,36 +85,49 @@ public class RaccoonEntity extends TameableEntity {
             --this.idleAnimationTimeout;
         }
 
+        if(this.earsWiggleAnimationTimeout <= 0){
+            this.earsWiggleAnimationTimeout = this.random.nextInt(80) + 160;
+            this.earsWiggleAnimationState.start(this.age);
+        } else {
+            --this.earsWiggleAnimationTimeout;
+        }
+
         if (this.isBegging()) {
+            this.begged = true;
             if(this.beggingAnimationTimeout <= 0){
                 this.beggingAnimationTimeout = 11;
-                this.toBegAnimationState.start(this.age);
+                this.standToBegAnimationState.start(this.age);
             } else if(this.beggingAnimationTimeout == 1){
-                this.toBegAnimationState.stop();
+                this.standToBegAnimationState.stop();
                 this.beggingAnimationState.startIfNotRunning(this.age);
             } else {
                 --beggingAnimationTimeout;
             }
-        } else {
-            this.toBegAnimationState.stop();
-            this.beggingAnimationState.stop();
-            this.beggingAnimationTimeout = 0;
+        } else if (this.begged) {
+                this.standToBegAnimationState.stop();
+                this.beggingAnimationState.stop();
+                this.begToStandAnimationState.startIfNotRunning(this.age);
+                this.beggingAnimationTimeout = 0;
+                this.begged = !this.begged;
         }
 
         if (this.isSitting()) {
+            this.sat = true;
             if(this.sittingAnimationTimeout <= 0){
                 this.sittingAnimationTimeout = 11;
-                this.toSitAnimationState.start(this.age);
+                this.standToSitAnimationState.start(this.age);
             } else if(this.sittingAnimationTimeout == 1){
-                this.toSitAnimationState.stop();
+                this.standToSitAnimationState.stop();
                 this.sittingAnimationState.startIfNotRunning(this.age);
             } else {
                 --sittingAnimationTimeout;
             }
-        } else {
-            this.toSitAnimationState.stop();
+        } else if (this.sat) {
+            this.standToSitAnimationState.stop();
             this.sittingAnimationState.stop();
+            this.sitToStandAnimationState.startIfNotRunning(this.age);
             this.sittingAnimationTimeout = 0;
+            this.sat = !this.sat;
         }
     }
 
@@ -145,6 +168,9 @@ public class RaccoonEntity extends TameableEntity {
         if(this.getWorld().isClient()) {
             setupAnimationStates();
         }
+        if(stealCooldown > 0){
+            --stealCooldown;
+        }
     }
 
     @Override
@@ -154,7 +180,7 @@ public class RaccoonEntity extends TameableEntity {
         this.goalSelector.add(1, new SitGoal(this));
         this.goalSelector.add(2, new FollowOwnerGoal(this, 1.5, 10.0f, 2.0f, false));
 
-        this.goalSelector.add(3, new RaccoonStealGoal(this, 3));
+        this.goalSelector.add(3, new RaccoonStealGoal(this, 1.5));
         this.goalSelector.add(4, new RaccoonBegGoal(this, 1.2D));
 
         this.goalSelector.add(5, new AnimalMateGoal(this, 1.150));
@@ -255,6 +281,7 @@ public class RaccoonEntity extends TameableEntity {
             if(this.getWorld().isClient()){
                 return ActionResult.CONSUME;
             } else {
+                System.out.println("oui");
                 this.eat(player, hand, itemStack);
 
                 if(!this.getWorld().isClient()){
@@ -276,7 +303,7 @@ public class RaccoonEntity extends TameableEntity {
                 return ActionResult.CONSUME;
             } else {
                 this.eat(player, hand, itemStack);
-                this.equipStack(EquipmentSlot.MAINHAND, itemStack.split(1));
+                this.setStackInHand(Hand.MAIN_HAND, item.getDefaultStack());
                 return ActionResult.SUCCESS;
             }
         } else if (isTamed() && !this.getWorld().isClient() && hand == Hand.MAIN_HAND){

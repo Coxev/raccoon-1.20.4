@@ -30,7 +30,6 @@ public class RaccoonStealGoal extends Goal {
     private final RaccoonEntity raccoon;
     private final double escapeSpeed;
     private Path path;
-    private int cooldown;
     private double initialX;
     private double initialY;
     private double initialZ;
@@ -82,7 +81,7 @@ public class RaccoonStealGoal extends Goal {
 
     @Override
     public boolean canStart() {
-        return getClosestTrashBin(10) != null && this.raccoon.getEquippedStack(EquipmentSlot.MAINHAND).isEmpty();
+        return getClosestTrashBin(10) != null && this.raccoon.getEquippedStack(EquipmentSlot.MAINHAND).isEmpty() && this.raccoon.stealCooldown == 0;
     }
 
     @Override
@@ -92,7 +91,6 @@ public class RaccoonStealGoal extends Goal {
 
     @Override
     public void start() {
-        this.cooldown = this.getTickCount(10);
         this.initialX = this.raccoon.getX();
         this.initialY = this.raccoon.getY();
         this.initialZ = this.raccoon.getZ();
@@ -100,18 +98,15 @@ public class RaccoonStealGoal extends Goal {
 
     @Override
     public void tick() {
-        --this.cooldown;
-        if(this.cooldown <= 0){
-            BlockPos blockPos = getClosestTrashBin(10);
-            if (blockPos != null){
-                if(this.raccoon.squaredDistanceTo(blockPos.getX(), blockPos.getY(), blockPos.getZ()) > 5) {
-                    this.raccoon.getNavigation().startMovingTo(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1);
-                } else {
-                    this.raccoon.setStealing(true);
-                    this.raccoon.equipStack(EquipmentSlot.MAINHAND, randomItem());
-                    this.raccoon.getNavigation().startMovingTo(initialX, initialY, initialZ, escapeSpeed);
-                    this.cooldown = this.getTickCount((8 + this.raccoon.getRandom().nextInt(4)) * 120);
-                }
+        BlockPos blockPos = getClosestTrashBin(10);
+        if (blockPos != null){
+            if(this.raccoon.squaredDistanceTo(blockPos.getX(), blockPos.getY(), blockPos.getZ()) > 3) {
+                this.raccoon.getNavigation().startMovingTo(blockPos.getX(), blockPos.getY(), blockPos.getZ(), 1);
+            } else {
+                this.raccoon.setStealing(true);
+                this.raccoon.equipStack(EquipmentSlot.MAINHAND, randomItem());
+                this.raccoon.getNavigation().startMovingTo(initialX - (blockPos.getX() - initialX), initialY, initialZ - (blockPos.getZ() - initialZ), escapeSpeed);
+                this.raccoon.stealCooldown = (this.raccoon.getRandom().nextInt(1200)) + 1200;
             }
         }
     }
